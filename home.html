@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to GenEats</title>
+    <style>
+        /* Full-page setup */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            position: relative;
+            background-image: url("/static/images/background.png");
+            background-size: cover;  
+            background-position: center;  
+            background-attachment: fixed;  
+        }
+
+        /* Overlay effect */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(12, 12, 12, 0.48);
+            backdrop-filter: blur(0.2px);
+            z-index: 1;
+        }
+
+        /* Content box */
+        .container {
+           
+            background: rgba(185, 180, 180, 0.54); /* Transparent white */
+            backdrop-filter: blur(15px); /* Frosted glass effect */
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 350px;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Fade-in effect */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1, p, .button {
+            opacity: 0;
+            animation: fadeIn 1.5s ease-in-out forwards;
+        }
+
+        h1 {
+            color:rgb(41, 42, 43);
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 18px;
+            color: rgb(35, 36, 36);
+            margin-bottom: 20px;
+            animation-delay: 0.5s;
+        }
+
+        /* Button animation */
+        .button {
+            background-color: rgb(241, 114, 76);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            animation-delay: 1s;
+        }
+
+        .button:hover {
+            background-color: #B8D8D8;
+            color: black;
+            transform: scale(1.05);
+            transition: 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to GenEats</h1>
+        <p>Your personalized meal plan generator!</p>
+        <a href="/login" class="button">Get Started!</a>
+    </div>
+</body>
+</html>

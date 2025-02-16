@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup - GenEats</title>
+    <style>
+        /* Same styles as login page for consistency */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            background-image: url("/static/images/background.png");
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        /* Dark overlay for better contrast */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(12, 12, 12, 0.48);
+            backdrop-filter: blur(0.2px);
+            z-index: 1;
+        }
+
+        /* Transparent Glass Effect */
+        .signup-container {
+            background: rgba(185, 180, 180, 0.54); /* Transparent white */
+            backdrop-filter: blur(10px); /* Frosted glass effect */
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 350px;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        h2 {
+            color: rgb(19, 20, 20);
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: rgba(184, 180, 180, 0.5); /* Slight transparency */
+            color: #333;
+        }
+
+        input::placeholder {
+            color: #555;
+        }
+
+        .signup-button {
+            background-color: rgb(241, 114, 76);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+            width: 100%;
+        }
+
+        .signup-button:hover {
+            background-color: #B8D8D8;
+            color: black;
+        }
+
+        /* Login link styling */
+        .login-link {
+            margin-top: 15px;
+            font-size: 14px;
+            color: rgb(9, 9, 9);
+        }
+
+        .login-link a {
+            color: rgb(250, 63, 7);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <h2>Create an Account</h2>
+        <form id="signup-form">
+            <input type="text" name="name" placeholder="Enter your name" required>
+            <input type="email" name="email" placeholder="Enter your email" required>
+            <input type="password" name="password" placeholder="Enter your password" required>
+            <input type="password" name="confirm_password" placeholder="Confirm your password" required>
+            <button type="submit" class="signup-button">Sign Up</button>
+        </form>
+        <p class="login-link">Already have an account? <a href="/login">Login</a></p>
+    </div>
+
+    <script>
+        document.getElementById('signup-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                password: formData.get('password'),
+                confirm_password: formData.get('confirm_password')
+            };
+
+            const response = await fetch('/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+            alert(result.message);  // Show success or error message
+
+            // Redirect to login page after successful signup
+            if (result.message === 'Signup successful!') {
+                window.location.href = '/login';
+            }
+        });
+    </script>
+</body>
+</html>
